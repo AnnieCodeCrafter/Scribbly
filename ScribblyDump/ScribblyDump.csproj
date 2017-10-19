@@ -148,8 +148,8 @@
     <Compile Include="Controllers\VerhaalController.cs" />
     <Compile Include="Database\CommentSqlContext.cs" />
     <Compile Include="Database\DatabaseConnection.cs" />
-    <Compile Include="Database\gebruikerSqlContext.cs" />
-    <Compile Include="Database\hoofdstukSqlContext.cs" />
+    <Compile Include="Database\GebruikerSqlContext.cs" />
+    <Compile Include="Database\HoofdstukSqlContext.cs" />
     <Compile Include="Database\VerhaalSqlContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -198,7 +198,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Gebruiker\gebruiker.cshtml" />
+    <Content Include="Views\Gebruiker\Index.cshtml" />
+    <Content Include="Views\Gebruiker\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,16 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+
+
 namespace ScribblyDump.Interfaces
 {
-    interface IGebruiker
+    interface IGebruiker<T>
     {
 
 
-        void addGebruiker();
-        void deleteGebruiker();
 
-        bool Inactief();
+        void addGebruiker(T obj);
+        void deleteGebruiker(T obj);
+
+
+        bool Inactief(bool yn);
 
 
 

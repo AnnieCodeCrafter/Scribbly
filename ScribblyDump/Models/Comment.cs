@@ -13,10 +13,10 @@ namespace ScribblyDump.Models
            get { return body; }
         }
 
-        public Comment(string body)
-        {
-            this.body = body;
+        //public Comment(string body)
+        //{
+        //    this.body = body;
 
-        }
+        //}
     }
 }

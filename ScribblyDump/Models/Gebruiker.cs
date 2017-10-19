@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
 namespace ScribblyDump.Models
 {
-    public class Gebruiker
+    public class Gebruiker 
     {
         private string username;
         private string email;
@@ -50,13 +51,17 @@ namespace ScribblyDump.Models
             get { return comment; }
         }
 
-        public Gebruiker(string username, string email, string password)
-        {
-            this.username = username;
-            this.email = email;
-            this.password = password;
-        }
+        //public Gebruiker(string username, string email, string password)
+        //{
+        //    this.username = username;
+        //    this.email = email;
+        //    this.password = password;
+        //}
 
+        //public Gebruiker()
+        //{
+
+        //}
 
     }
 }

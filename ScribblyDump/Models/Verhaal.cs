@@ -39,13 +39,13 @@ namespace ScribblyDump.Models
             get { return tracker; }
         }
 
-        public Verhaal(string titel, string beschrijving, string coverart)
-        {
-            this.titel = titel;
-            this.beschrijving = beschrijving;
-            this.coverart = coverart;
+        //public Verhaal(string titel, string beschrijving, string coverart)
+        //{
+        //    this.titel = titel;
+        //    this.beschrijving = beschrijving;
+        //    this.coverart = coverart;
    
-        }
+        //}
         
     }
 }
