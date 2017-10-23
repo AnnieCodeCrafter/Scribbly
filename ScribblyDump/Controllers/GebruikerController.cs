@@ -13,8 +13,6 @@ namespace ScribblyDump.Controllers
         public ActionResult Index()
         {
             
-            
-           
             return View();
            
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScribblyDump.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace ScribblyDump.Interfaces
 {
-    interface IGebruiker<T>
+    interface IGebruiker
     {
 
 
 
-        void addGebruiker(T obj);
-        void deleteGebruiker(T obj);
+        void addGebruiker(Gebruiker obj);
+        void deleteGebruiker(Gebruiker obj);
 
 
         bool Inactief(bool yn);
