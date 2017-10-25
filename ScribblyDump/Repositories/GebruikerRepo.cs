@@ -10,6 +10,13 @@ namespace ScribblyDump.Repositories
 {
     public class GebruikerRepo
     {
+        IGebruiker context;
+
+        GebruikerRepo(IGebruiker context)
+        {
+            this.context = context;
+        }
+        
 
     }
 }
