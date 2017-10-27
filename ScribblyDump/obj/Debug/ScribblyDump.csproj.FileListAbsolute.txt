@@ -65,3 +65,4 @@ C:\AAALL stuffs\AAAFontys\32\Scribblings\Program\ScribblyDump\ScribblyDump\bin\M
 C:\AAALL stuffs\AAAFontys\32\Scribblings\Program\ScribblyDump\ScribblyDump\bin\Microsoft.AI.Web.xml
 C:\AAALL stuffs\AAAFontys\32\Scribblings\Program\ScribblyDump\ScribblyDump\obj\Debug\ScribblyDump.dll
 C:\AAALL stuffs\AAAFontys\32\Scribblings\Program\ScribblyDump\ScribblyDump\obj\Debug\ScribblyDump.pdb
+C:\AAALL stuffs\AAAFontys\32\Scribblings\Program\ScribblyDump\ScribblyDump\obj\Debug\ScribblyDump.csproj.CoreCompileInputs.cache

@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace ScribblyDump.Interfaces
 {
-    interface IGebruiker
+    public interface IGebruiker
     {
 
 
 
-        void addGebruiker(Gebruiker obj);
+        void addGebruiker(string Username, string Password);
+        // changed from Gebruiker obj to this, change if necessary
         void deleteGebruiker(Gebruiker obj);
 
 

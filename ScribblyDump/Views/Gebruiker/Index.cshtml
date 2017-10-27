@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ScribblyDump.Models.Gebruiker
+
+@{
     ViewBag.Title = "boi I die";
 
 }
@@ -7,12 +9,15 @@
 <p> okay so what im gonna do is try to put the thing somewhere and the other thing somewhere fucking else</p>
 
 
-@* i go to a view, test, here, to be removed later cuz i ain't gonna use a thing called test of course*@
-@using (Html.BeginForm("Redirecty", "Gebruiker"))
+
+@using (Html.BeginForm("Login", "Gebruiker"))
 {
+    @Html.TextBoxFor(model =>model.Username)
+    @Html.TextBoxFor(model=>model.Password)
 
-    <input type="submit" name="yey" value="gototest"/>
 
+    <input type="submit" name="yey" value="submit"/>
 }
+
 
 
