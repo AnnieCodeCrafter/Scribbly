@@ -12,40 +12,65 @@ namespace ScribblyDump.Database
 {
     public class GebruikerSqlContext : DatabaseConnection, IGebruiker
     {
-        //public void addGebruiker(Gebruiker obj)
-        //{
-        //    using (SqlConnection conn = new SqlConnection(ConnectionString))
-        //    {
-        //        conn.Open();
-        //        string query = "INSERT INTO Gebruiker VALUES (@username, @password)";
-        //        using (SqlCommand cmd = new SqlCommand(query, conn))
-        //        {
-        //            cmd.CommandType = CommandType.Text;
-        //            cmd.Parameters.AddWithValue("@username", obj.Username);
-        //            cmd.Parameters.AddWithValue("@password", obj.Password);
-
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-
-        //}
-
-        public void addGebruiker(string Username, string Password)
+         public void addGebruiker(string Username, string Password, string Email)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
-                string query = "INSERT INTO Gebruiker VALUES (@Username, @Password)";
+                string query = "INSERT INTO Gebruiker(Gebruikersnaam, Wachtwoord, Email) VALUES (@Gebruikersnaam, @Wachtwoord, @Email)";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Username", Username);
-                    cmd.Parameters.AddWithValue("@Password", Password);
+                    cmd.Parameters.AddWithValue("@Gebruikersnaam", Username);
+                    cmd.Parameters.AddWithValue("@Wachtwoord", Password);
+                    cmd.Parameters.AddWithValue("@Email", Email);
 
                     cmd.ExecuteNonQuery();
                 }
             }
 
+        }
+
+        public bool loginGebruiker(string Username, string Password)
+        { 
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT ID, Gebruikersnaam, Wachtwoord FROM Gebruiker WHERE Gebruikersnaam = @username AND Wachtwoord = @password";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+
+                    cmd.Parameters.AddWithValue("@username", Username);
+                    cmd.Parameters.AddWithValue("@password", Password);
+
+                    SqlDataAdapter adapt = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adapt.Fill(ds);
+                    int count = ds.Tables[0].Rows.Count;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            int ID = ((int)reader["ID"]);
+                        }
+                    }
+
+
+                    conn.Close();
+
+                    if (count == 1)
+                    {
+                        return true;
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
         }
 
         public void deleteGebruiker(Gebruiker obj)
@@ -57,5 +82,7 @@ namespace ScribblyDump.Database
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

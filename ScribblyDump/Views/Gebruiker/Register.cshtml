@@ -1,0 +1,23 @@
+﻿@model ScribblyDump.Models.Gebruiker
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>register plz</h2>
+
+<p> yo yo</p>
+
+@using (Html.BeginForm("Register", "Gebruiker"))
+{
+    <label> Username</label>
+    @Html.TextBoxFor(model => model.Username)
+    <label> Password </label>
+    @Html.TextBoxFor(model => model.Password)
+    <label> Email</label>
+    @Html.TextBoxFor(model => model.Email)
+
+
+    <input type="submit" name="yey" value="submit" />
+}
+
+

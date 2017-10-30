@@ -18,12 +18,18 @@ namespace ScribblyDump.Repositories
             this.context = context;
         }
         //changed from gebruiker obj, change if necessary
-        public void addGebruiker(string Username, string Password)
+        public void addGebruiker(string Username, string Password, string Email)
         {
-            this.context.addGebruiker(Username, Password);
+            this.context.addGebruiker(Username, Password, Email);
         }
 
-        
+        public bool LoginGebruiker(string Username, string Password)
+        {
+           
+            return context.loginGebruiker(Username, Password);
+            
+        }
+
 
         public void deleteGebruiker (Gebruiker obj)
         {

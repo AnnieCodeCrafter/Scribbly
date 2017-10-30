@@ -15,9 +15,11 @@ namespace ScribblyDump.Interfaces
 
 
 
-        void addGebruiker(string Username, string Password);
+        void addGebruiker(string Username, string Password, string Email);
         // changed from Gebruiker obj to this, change if necessary
         void deleteGebruiker(Gebruiker obj);
+
+        bool loginGebruiker(string Username, string Password);
 
 
         bool Inactief(bool yn);

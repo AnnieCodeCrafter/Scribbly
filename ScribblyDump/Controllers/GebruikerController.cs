@@ -22,12 +22,39 @@ namespace ScribblyDump.Controllers
            
         }
 
+        public ActionResult GoToRegister()
+        {
+            return View("Register");
+        }
+
+        public ActionResult GoToLogin()
+        {
+            return View("Login");
+        }
+
         [HttpPost]
+        public ActionResult Register(string Username, string Password, string Email)
+        {           
+            Repo.addGebruiker(Username, Password, Email);
+            return View("Login");
+        }
+
         public ActionResult Login(string Username, string Password)
         {
+            if (Repo.LoginGebruiker(Username, Password) == true)
+            {
+
+                
+                return View("userPage");
+
+            }
+
+            else
+            {
+                return View("Nope");
+            }
            
-            Repo.addGebruiker(Username, Password);
-            return View("Test");
+           
         }
 
 
