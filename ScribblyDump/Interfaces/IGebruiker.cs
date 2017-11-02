@@ -13,17 +13,16 @@ namespace ScribblyDump.Interfaces
     public interface IGebruiker
     {
 
-
-
-        void addGebruiker(string Username, string Password, string Email);
+        void addGebruiker(Gebruiker obj);
         // changed from Gebruiker obj to this, change if necessary
         void deleteGebruiker(Gebruiker obj);
 
-        bool loginGebruiker(string Username, string Password);
+        bool loginGebruiker(Gebruiker obj);
 
 
         bool Inactief(bool yn);
 
+        void GebrDescr(Gebruiker obj);
 
 
 

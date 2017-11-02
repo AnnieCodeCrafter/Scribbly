@@ -15,6 +15,8 @@ namespace ScribblyDump.Controllers
 
         GebruikerRepo Repo = new GebruikerRepo(new GebruikerSqlContext());
         // GET: Gebruiker
+        // TODO: change back to .obj
+
         public ActionResult Index()
         {
             
@@ -33,15 +35,27 @@ namespace ScribblyDump.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(string Username, string Password, string Email)
-        {           
-            Repo.addGebruiker(Username, Password, Email);
+        public ActionResult Register(Gebruiker obj)
+        {
+                
+            var keys = Request.Form.AllKeys;            
+            string username = Request.Form.Get(keys[0]);
+            string password = Request.Form.Get(keys[1]);
+            string email = Request.Form.Get(keys[2]);
+
+            // obj = new Gebruiker(Username, Email, Password);
+            obj = new Gebruiker(username, password, email);
+            Repo.addGebruiker(obj);
             return View("Login");
         }
 
-        public ActionResult Login(string Username, string Password)
+        public ActionResult Login(Gebruiker obj)
         {
-            if (Repo.LoginGebruiker(Username, Password) == true)
+            var keys = Request.Form.AllKeys;
+            string username = Request.Form.Get(keys[0]);
+            string password = Request.Form.Get(keys[1]);
+            obj = new Gebruiker(username, password);
+            if (Repo.LoginGebruiker(obj) == true)
             {
 
                 
@@ -55,6 +69,14 @@ namespace ScribblyDump.Controllers
             }
            
            
+        }
+
+        public ActionResult Description(Gebruiker obj)
+        {
+            
+
+
+            return View("userPage");
         }
 
 

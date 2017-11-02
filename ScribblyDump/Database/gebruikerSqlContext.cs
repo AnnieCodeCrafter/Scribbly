@@ -8,11 +8,13 @@ using ScribblyDump.Database;
 using System.Data.SqlClient;
 using System.Data;
 
+
 namespace ScribblyDump.Database
 {
     public class GebruikerSqlContext : DatabaseConnection, IGebruiker
     {
-         public void addGebruiker(string Username, string Password, string Email)
+       
+        public void addGebruiker(Gebruiker obj)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -21,17 +23,19 @@ namespace ScribblyDump.Database
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Gebruikersnaam", Username);
-                    cmd.Parameters.AddWithValue("@Wachtwoord", Password);
-                    cmd.Parameters.AddWithValue("@Email", Email);
+                    cmd.Parameters.AddWithValue("@Gebruikersnaam", obj.Username);
+                    cmd.Parameters.AddWithValue("@Wachtwoord", obj.Password);
+                    cmd.Parameters.AddWithValue("@Email", obj.Email);
 
                     cmd.ExecuteNonQuery();
+
                 }
+                conn.Close();
             }
 
         }
 
-        public bool loginGebruiker(string Username, string Password)
+        public bool loginGebruiker(Gebruiker obj)
         { 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -40,8 +44,8 @@ namespace ScribblyDump.Database
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
 
-                    cmd.Parameters.AddWithValue("@username", Username);
-                    cmd.Parameters.AddWithValue("@password", Password);
+                    cmd.Parameters.AddWithValue("@username", obj.Username);
+                    cmd.Parameters.AddWithValue("@password", obj.Password);
 
                     SqlDataAdapter adapt = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
@@ -81,6 +85,11 @@ namespace ScribblyDump.Database
         public bool Inactief(bool yn)
         {
             throw new NotImplementedException();
+        }
+
+        public void GebrDescr(Gebruiker obj)
+        {
+
         }
 
        

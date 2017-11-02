@@ -8,6 +8,8 @@ namespace ScribblyDump.Models
 {
     public class Gebruiker 
     {
+        //TODO: make good constructor
+
         private string username;
         private string email;
         private string password;
@@ -51,17 +53,25 @@ namespace ScribblyDump.Models
             get { return comment; }
         }
 
-        //public Gebruiker(string username, string email, string password)
-        //{
-        //    this.username = username;
-        //    this.email = email;
-        //    this.password = password;
-        //}
+        public Gebruiker(string username, string password, string email)
+        {
+            this.username = username;
+            this.email = email;
+            this.password = password;
+        }
 
-        //public Gebruiker()
-        //{
+        public Gebruiker()
+        {
 
-        //}
+        }
+
+        public Gebruiker(string username, string password)
+        {
+            this.username = username;
+            this.password = password;
+        }
+
+
 
     }
 }

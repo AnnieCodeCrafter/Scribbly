@@ -17,16 +17,16 @@ namespace ScribblyDump.Repositories
         {
             this.context = context;
         }
-        //changed from gebruiker obj, change if necessary
-        public void addGebruiker(string Username, string Password, string Email)
+        //changed from genothinbruiker obj, change if necessary
+        public void addGebruiker(Gebruiker obj)
         {
-            this.context.addGebruiker(Username, Password, Email);
+            this.context.addGebruiker(obj);
         }
 
-        public bool LoginGebruiker(string Username, string Password)
+        public bool LoginGebruiker(Gebruiker obj)
         {
            
-            return context.loginGebruiker(Username, Password);
+            return context.loginGebruiker(obj);
             
         }
 
@@ -39,6 +39,11 @@ namespace ScribblyDump.Repositories
         public void Inactief(bool yn)
         {
             this.context.Inactief(yn);
+        }
+
+        public void GebrDescr(Gebruiker obj)
+        {
+
         }
 
     }

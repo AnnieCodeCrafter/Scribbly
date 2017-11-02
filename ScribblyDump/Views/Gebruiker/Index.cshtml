@@ -1,12 +1,25 @@
 ﻿@model ScribblyDump.Models.Gebruiker
 
+
+<html>
+
+    <head>
+                                         <!-- een boven, een boven, Content, Scribble.css-->
+        <link rel="stylesheet" type="text/css" href="../../Content/Scribble.css">
+    </head>
+
+    <body>
 @{
     ViewBag.Title = "boi I die";
 
 }
-<h2>@ViewBag.Title</h2>
 
-<p> welcome binch</p>
+
+
+
+    <h2>@ViewBag.Title</h2>
+
+    <p> welcome binch</p>
 
 @using (Html.BeginForm("GoToRegister", "Gebruiker"))
 {
@@ -18,6 +31,8 @@
     <input type="submit" name="golog" value="Login" />
 }
 
+    </body>
+</html>
 
 
 
