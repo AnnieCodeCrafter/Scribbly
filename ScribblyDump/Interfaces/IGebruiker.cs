@@ -14,17 +14,21 @@ namespace ScribblyDump.Interfaces
     {
 
         void addGebruiker(Gebruiker obj);
-        // changed from Gebruiker obj to this, change if necessary
+     
         void deleteGebruiker(Gebruiker obj);
 
-        bool loginGebruiker(Gebruiker obj);
+
+        //Gebruiker loginGebruiker
+        Gebruiker loginGebruiker(Gebruiker obj);
 
 
         bool Inactief(bool yn);
 
-        void GebrDescr(Gebruiker obj);
+        void GetGebrDescr(Gebruiker obj);
 
+        void SetGebrDescr(string username, string descr);
 
+        Gebruiker getGebruiker(Gebruiker obj);
 
 
        

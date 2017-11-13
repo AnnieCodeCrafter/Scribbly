@@ -207,6 +207,7 @@
     <Content Include="Views\Gebruiker\Login.cshtml" />
     <Content Include="Views\Gebruiker\userPage.cshtml" />
     <Content Include="Views\Gebruiker\nope.cshtml" />
+    <Content Include="Views\Gebruiker\EditUserPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,9 +3,19 @@
     ViewBag.Title = "userPage";
 }
 
-<h2>userPage</h2>
+<h2>@Model.Username  </h2>
 
-@{ 
-    ViewBag.Body = "hello";
+
+@using (Html.BeginForm("Description", "Gebruiker"))
+{
+    if (Session["Username"] != null)
+    {     
+            <p id="userdescrLabel">
+                @Model.Description
+            </p>       
+            <input id="Edit" type="submit" value="Edit" />
+        
+    }
+
 }
 

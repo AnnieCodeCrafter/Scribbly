@@ -47,6 +47,7 @@ namespace ScribblyDump.Controllers
             obj = new Gebruiker(username, password, email);
             Repo.addGebruiker(obj);
             return View("Login");
+            
         }
 
         public ActionResult Login(Gebruiker obj)
@@ -54,12 +55,13 @@ namespace ScribblyDump.Controllers
             var keys = Request.Form.AllKeys;
             string username = Request.Form.Get(keys[0]);
             string password = Request.Form.Get(keys[1]);
-            obj = new Gebruiker(username, password);
-            if (Repo.LoginGebruiker(obj) == true)
+            obj = Repo.LoginGebruiker(new Gebruiker(username, password));
+            if (obj != null)
             {
-
-                
-                return View("userPage");
+                // you gotta fill the session before you return the view, or else its bad
+                Session["Message"] = "yey";
+                Session["Username"] = username;
+                return View("userPage", obj);
 
             }
 
@@ -73,12 +75,25 @@ namespace ScribblyDump.Controllers
 
         public ActionResult Description(Gebruiker obj)
         {
+            string Username = Session["Username"].ToString();
+            obj = Repo.GetGebruiker(new Gebruiker(Username));
+
+            return View("EditUserPage", obj);
+        }       
+    
+
+        public ActionResult UserDescr(string username, string description)
+        {
+
             
+            username = Session["Username"].ToString() ;
+            var keys = Request.Form.AllKeys;
+            string Descr = Request.Form.Get(keys[0]);
 
+            Repo.SetGebrDescr(username, description);
 
-            return View("userPage");
+            return View();
         }
-
 
 
 

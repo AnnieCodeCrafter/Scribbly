@@ -23,7 +23,7 @@ namespace ScribblyDump.Repositories
             this.context.addGebruiker(obj);
         }
 
-        public bool LoginGebruiker(Gebruiker obj)
+        public Gebruiker LoginGebruiker(Gebruiker obj)
         {
            
             return context.loginGebruiker(obj);
@@ -41,10 +41,19 @@ namespace ScribblyDump.Repositories
             this.context.Inactief(yn);
         }
 
-        public void GebrDescr(Gebruiker obj)
+        public void GetGebrDescr(Gebruiker obj)
         {
-
+            this.context.GetGebrDescr(obj);
         }
 
+        public void SetGebrDescr(string username, string descr)
+        {
+            this.context.SetGebrDescr(username, descr);
+        }
+
+        public Gebruiker GetGebruiker(Gebruiker obj)
+        {
+            return context.getGebruiker(obj);
+        }
     }
 }
