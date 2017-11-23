@@ -157,12 +157,16 @@
     </Compile>
     <Compile Include="Interfaces\IComment.cs" />
     <Compile Include="Interfaces\IGebruiker.cs" />
+    <Compile Include="Interfaces\IVerhaal.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Gebruiker.cs" />
     <Compile Include="Models\Hoofdstuk.cs" />
     <Compile Include="Models\Verhaal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GebruikerRepo.cs" />
+    <Compile Include="Repositories\VerhaalRepo.cs" />
+    <Compile Include="ViewModel\GebruikerViewModel.cs" />
+    <Compile Include="ViewModel\VerhaalViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -208,12 +212,12 @@
     <Content Include="Views\Gebruiker\userPage.cshtml" />
     <Content Include="Views\Gebruiker\nope.cshtml" />
     <Content Include="Views\Gebruiker\EditUserPage.cshtml" />
+    <Content Include="Views\Verhaal\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Hoofdstuk\" />
-    <Folder Include="Views\Verhaal\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

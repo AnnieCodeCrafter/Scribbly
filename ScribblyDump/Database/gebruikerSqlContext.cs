@@ -39,8 +39,6 @@ namespace ScribblyDump.Database
 
         public Gebruiker loginGebruiker(Gebruiker obj)
         { 
-            
-
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 try
@@ -51,30 +49,43 @@ namespace ScribblyDump.Database
                     {
                         cmd.Parameters.AddWithValue("@username", obj.Username);
                         cmd.Parameters.AddWithValue("@password", obj.Password);
-
+                       
                         SqlDataAdapter adapt = new SqlDataAdapter(cmd);
                         DataSet ds = new DataSet();
                         adapt.Fill(ds);
-                        
 
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        int count = ds.Tables[0].Rows.Count;
+
+                        //conn.Close();
+
+                        if (count == 1)
                         {
-                            while (reader.Read())
+                            using (SqlDataReader reader = cmd.ExecuteReader())
                             {
-                                // get everything from the things and make a new obj
-                                string desc = (string)reader["description"];
-                                string email = (string)reader["Email"];
-                                int ID = ((int)reader["ID"]);
-                                string profilePic = (string)reader["profilePic"];
-                                obj = new Gebruiker(obj.Username, obj.Password, email, desc, profilePic);
+                                while (reader.Read())
+                                {
+                                    // get everything from the things and make a new obj
+                                    string desc = (string)reader["description"];
+                                    string email = (string)reader["Email"];
+                                    int ID = ((int)reader["ID"]);
+                                    string profilePic = (string)reader["profilePic"];
+
+                                    obj = new Gebruiker(obj.Username, obj.Password, email, desc, profilePic);
+
+                                }
                             }
+
                         }
+
+                        else
+                        {
+                            obj = null;
+                        }
+
+                       
                     }
                 }
-                catch
-                {
-                    obj = null;
-                }
+                
                 finally
                 {
                     conn.Close();
@@ -94,7 +105,7 @@ namespace ScribblyDump.Database
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@username", obj.Username);
-                        
+                        cmd.ExecuteNonQuery();
 
                         SqlDataAdapter adapt = new SqlDataAdapter(cmd);
                         DataSet ds = new DataSet();
@@ -151,20 +162,25 @@ namespace ScribblyDump.Database
                 try
                 {
                     conn.Open();
-                    string query = "UPDATE Gebruiker SET description = @descr WHERE Username = @Username";
+                    string query = "UPDATE Gebruiker SET description = @descr WHERE Gebruikersnaam = @Username";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@descr", descr);
-                        cmd.Parameters.AddWithValue("@Username", username);         
-
+                        cmd.Parameters.AddWithValue("@Username", username);
+                        cmd.ExecuteNonQuery();
 
                     }
 
                 }
 
-                catch
+                catch 
                 {
+                    
+                }
 
+                finally
+                {
+                    conn.Close();
                 }
 
             }

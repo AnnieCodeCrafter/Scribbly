@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using ScribblyDump.Repositories;
 using ScribblyDump.Interfaces;
 using ScribblyDump.Database;
+using ScribblyDump.ViewModel;
+using System.Data.SqlClient;
+using System.Data.Sql;
 
 namespace ScribblyDump.Controllers
 {
@@ -15,15 +18,14 @@ namespace ScribblyDump.Controllers
 
         GebruikerRepo Repo = new GebruikerRepo(new GebruikerSqlContext());
         // GET: Gebruiker
-        // TODO: change back to .obj
+        // TODO: RedirectToAction research
 
         public ActionResult Index()
         {
-            
             return View();
-           
         }
 
+        //view: index
         public ActionResult GoToRegister()
         {
             return View("Register");
@@ -34,65 +36,85 @@ namespace ScribblyDump.Controllers
             return View("Login");
         }
 
+        //view: register
         [HttpPost]
-        public ActionResult Register(Gebruiker obj)
+        public ActionResult Register(GebruikerViewModel obj)
         {
-                
-            var keys = Request.Form.AllKeys;            
-            string username = Request.Form.Get(keys[0]);
-            string password = Request.Form.Get(keys[1]);
-            string email = Request.Form.Get(keys[2]);
-
-            // obj = new Gebruiker(Username, Email, Password);
-            obj = new Gebruiker(username, password, email);
-            Repo.addGebruiker(obj);
-            return View("Login");
-            
-        }
-
-        public ActionResult Login(Gebruiker obj)
-        {
-            var keys = Request.Form.AllKeys;
-            string username = Request.Form.Get(keys[0]);
-            string password = Request.Form.Get(keys[1]);
-            obj = Repo.LoginGebruiker(new Gebruiker(username, password));
-            if (obj != null)
+            try
             {
-                // you gotta fill the session before you return the view, or else its bad
-                Session["Message"] = "yey";
-                Session["Username"] = username;
-                return View("userPage", obj);
-
+                Gebruiker X = new Gebruiker(obj.Username, obj.Password, obj.Email);
+                Repo.addGebruiker(X);
+                return View("Login");
             }
 
-            else
+            catch (SqlException e)
             {
                 return View("Nope");
             }
+
+           
+            
+        }
+
+        //view: login
+        public ActionResult Login(GebruikerViewModel obj)
+        {
+            
+                Gebruiker X = new Gebruiker(obj.Username, obj.Password);
+            //Repo.LoginGebruiker(X);
+            Gebruiker Y = Repo.LoginGebruiker(X);
+
+
+                
+                if (Y != null)
+                {
+                    obj = new GebruikerViewModel(Y.Username, Y.Password, Y.Email, Y.Description);
+                    // you gotta fill the session before you return the view, or else its bad
+                    Session["Message"] = "yey";
+                    Session["Username"] = obj.Username;
+
+                    return View("userPage", obj);
+                }
+
+                else
+                {
+                    return View("Nope");
+                }
+            
+            
+           
+
+           
            
            
         }
-
-        public ActionResult Description(Gebruiker obj)
+        // view: userpage
+        public ActionResult Description(GebruikerViewModel obj)
         {
-            string Username = Session["Username"].ToString();
-            obj = Repo.GetGebruiker(new Gebruiker(Username));
-
-            return View("EditUserPage", obj);
-        }       
-    
-
-        public ActionResult UserDescr(string username, string description)
-        {
-
+            obj.Username = Session["Username"].ToString();
             
-            username = Session["Username"].ToString() ;
-            var keys = Request.Form.AllKeys;
-            string Descr = Request.Form.Get(keys[0]);
 
-            Repo.SetGebrDescr(username, description);
+            Gebruiker G = new Gebruiker(obj.Username);
+            Gebruiker Y = Repo.GetGebruiker(G);
+     
+            obj = new GebruikerViewModel(Y.Username, Y.Password, Y.Email, Y.Description);
+            return View("EditUserPage", obj);
+        }
 
-            return View();
+
+        //view: edituserpage       
+        public ActionResult UserDescr(GebruikerViewModel obj)
+        {            
+            string username = Session["Username"].ToString();
+            Gebruiker G = new Gebruiker(username);
+            Repo.SetGebrDescr(username, obj.Description);
+            Gebruiker F = Repo.GetGebruiker(G);
+            obj = new GebruikerViewModel(F.Username, F.Password, F.Email, F.Description);
+            
+            
+            
+
+            return View("userPage", obj);
         }
 
 

@@ -8,7 +8,7 @@ namespace ScribblyDump.Models
 {
     public class Gebruiker 
     {
-        //TODO: make good constructor
+        
 
         private string username;
         private string email;
@@ -22,6 +22,7 @@ namespace ScribblyDump.Models
         public string Username
         {
             get { return username; }
+         
         }
 
         public string Email
@@ -86,5 +87,11 @@ namespace ScribblyDump.Models
             this.description = desc;
             this.profilepic = profilePic;
         }
+        public Gebruiker()
+        {
+           
+
+        }
+
     }
 }
