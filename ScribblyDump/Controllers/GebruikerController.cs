@@ -11,6 +11,7 @@ using ScribblyDump.ViewModel;
 using System.Data.SqlClient;
 using System.Data.Sql;
 
+
 namespace ScribblyDump.Controllers
 {
     public class GebruikerController : Controller
@@ -115,6 +116,14 @@ namespace ScribblyDump.Controllers
             
 
             return View("userPage", obj);
+        }
+
+        //view: userpage
+
+        public ActionResult GoToStory(GebruikerViewModel obj)
+        {
+
+           return RedirectToAction("index", "verhaal");
         }
 
 

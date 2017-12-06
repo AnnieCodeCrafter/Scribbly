@@ -1,0 +1,41 @@
+﻿@model List<ScribblyDump.ViewModel.VerhaalViewModel>
+@{
+    ViewBag.Title = "VerhaalPage";
+}
+
+<h2>VerhaalPage</h2>
+
+@using (Html.BeginForm())
+{
+<table id="myTable" style="width: 100%">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Datum</th>
+            <th>Boodschappen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @using (Html.BeginForm("Bon", "Bon", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ActionLink("Details", "Details", "Bon", new { id = item.Id }, null)
+                    }
+                </td>
+            </tr>}
+    </tbody>
+</table>
+}

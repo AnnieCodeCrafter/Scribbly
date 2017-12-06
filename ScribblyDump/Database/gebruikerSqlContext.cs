@@ -13,7 +13,7 @@ namespace ScribblyDump.Database
 {
     public class GebruikerSqlContext : DatabaseConnection, IGebruiker
     {
-       
+
         public void addGebruiker(Gebruiker obj)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -38,7 +38,7 @@ namespace ScribblyDump.Database
         }
 
         public Gebruiker loginGebruiker(Gebruiker obj)
-        { 
+        {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 try
@@ -49,7 +49,7 @@ namespace ScribblyDump.Database
                     {
                         cmd.Parameters.AddWithValue("@username", obj.Username);
                         cmd.Parameters.AddWithValue("@password", obj.Password);
-                       
+
                         SqlDataAdapter adapt = new SqlDataAdapter(cmd);
                         DataSet ds = new DataSet();
                         adapt.Fill(ds);
@@ -82,10 +82,10 @@ namespace ScribblyDump.Database
                             obj = null;
                         }
 
-                       
+
                     }
                 }
-                
+
                 finally
                 {
                     conn.Close();
@@ -140,20 +140,7 @@ namespace ScribblyDump.Database
 
         }
 
-        public void deleteGebruiker(Gebruiker obj)
-        {
-            
-        }
 
-        public bool Inactief(bool yn)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GetGebrDescr(Gebruiker obj)
-        {
-
-        }
 
         public void SetGebrDescr(string username, string descr)
         {
@@ -173,9 +160,9 @@ namespace ScribblyDump.Database
 
                 }
 
-                catch 
+                catch
                 {
-                    
+
                 }
 
                 finally
@@ -186,7 +173,42 @@ namespace ScribblyDump.Database
             }
         }
 
+        public int GetGebruikerID(string username)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT ID FROM Gebruiker WHERE Gebruikernsaam = @username";
 
-       
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.ExecuteNonQuery();
+
+
+                    SqlDataAdapter adapt = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adapt.Fill(ds);
+
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int ID = ((int)reader["ID"]);
+                            return ID;
+                        }
+                       
+                    }
+                   
+                }
+               
+            }
+
+
+           
+
+
+        }
     }
 }

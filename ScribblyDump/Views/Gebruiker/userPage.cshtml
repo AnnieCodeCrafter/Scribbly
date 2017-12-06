@@ -1,4 +1,6 @@
 ﻿@model ScribblyDump.ViewModel.GebruikerViewModel
+
+
 @{
     ViewBag.Title = "userPage";
 }
@@ -13,9 +15,24 @@
             <p id="userdescrLabel">
                 @Model.Description
             </p>       
-            <input id="Edit" type="submit" value="Edit" />
+           <input id="Edit" type="submit" value="Edit" /> 
         
     }
 
 }
+
+
+@using (Html.BeginForm("GoToStory", "Gebruiker"))
+{
+    <input id="submit" type="submit" value="go to story" />
+}
+
+
+
+
+
+
+
+
+
 

@@ -5,18 +5,32 @@ using System.Web;
 
 namespace ScribblyDump.Models
 {
+    //TODO: update class diagram enum 
+    public enum genre
+    {
+        sliceoflife, adventure, drama, tragedy, comedy, sciencefiction, fantasy, horror, romance, crossover, mystery
+    }
+
     public class Verhaal
     {
         private string titel;
         private string beschrijving;
         private string coverart;
+        private int auteurid;
         private List<Hoofdstuk> hoofdstuk;
         private List<Gebruiker> tracker;
+
+        public  genre Genre { get; set; }
         
 
         public string Titel
         {
             get { return titel; }
+        }
+
+        public int AuteurID
+        {
+            get { return auteurid; }
         }
 
         public string Beschrijving

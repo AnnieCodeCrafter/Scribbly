@@ -11,7 +11,11 @@ namespace ScribblyDump.Controllers
         // GET: Verhaal
         public ActionResult Index()
         {
+            //TODO: repo--IEnumerable verhaal
             return View();
         }
+
+
+
     }
 }
