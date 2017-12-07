@@ -60,6 +60,14 @@ namespace ScribblyDump.Models
         //    this.coverart = coverart;
    
         //}
+
+        public Verhaal(string titel, string beschrijving, genre genre, int auteurID)
+        {
+            this.titel = titel;
+            this.beschrijving = beschrijving;
+            this.auteurid = auteurID;
+            this.Genre = genre;
+        }
         
     }
 }

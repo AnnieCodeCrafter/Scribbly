@@ -30,6 +30,8 @@ namespace ScribblyDump.Interfaces
 
         Gebruiker getGebruiker(Gebruiker obj);
 
+        int GetGebruikerID(string username);
+
 
        
     }

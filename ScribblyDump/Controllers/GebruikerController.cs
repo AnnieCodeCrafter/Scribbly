@@ -18,6 +18,7 @@ namespace ScribblyDump.Controllers
     {
 
         GebruikerRepo Repo = new GebruikerRepo(new GebruikerSqlContext());
+        VerhaalRepo Bepo = new VerhaalRepo(new VerhaalSqlContext());
         // GET: Gebruiker
         // TODO: RedirectToAction research
 
@@ -122,8 +123,24 @@ namespace ScribblyDump.Controllers
 
         public ActionResult GoToStory(GebruikerViewModel obj)
         {
+            string username = Session["Username"].ToString();
 
-           return RedirectToAction("index", "verhaal");
+            int usID = Repo.getGebruikerID(username);
+            if(usID != 0)
+            {
+                Session["usID"] = usID;
+                Bepo.GetVerhaal(usID);
+                return RedirectToAction("index", "verhaal");
+
+            }
+
+            else
+            {
+               
+                return View("Nope");
+            }
+           
+
         }
 
 

@@ -175,40 +175,35 @@ namespace ScribblyDump.Database
 
         public int GetGebruikerID(string username)
         {
+            int ID = 0;
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT ID FROM Gebruiker WHERE Gebruikernsaam = @username";
+                string query = "SELECT ID FROM Gebruiker WHERE Gebruikersnaam = @username";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.ExecuteNonQuery();
 
-
                     SqlDataAdapter adapt = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     adapt.Fill(ds);
-
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            int ID = ((int)reader["ID"]);
-                            return ID;
-                        }
-                       
+                            ID = ((int)reader["ID"]);
+                           
+                        }                       
                     }
-                   
+
+                  
                 }
-               
+                return ID;
             }
-
-
            
-
-
         }
     }
 }

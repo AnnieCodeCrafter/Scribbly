@@ -34,7 +34,7 @@ namespace ScribblyDump.Database
             }
         }
 
-        public void GetVerhaal(Verhaal V)
+        public void GetVerhaal(int id)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -43,7 +43,7 @@ namespace ScribblyDump.Database
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@ID", V.AuteurID);
+                    cmd.Parameters.AddWithValue("@ID", id);
                     cmd.ExecuteNonQuery();
                 }
 

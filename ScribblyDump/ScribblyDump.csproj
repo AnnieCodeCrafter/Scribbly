@@ -213,7 +213,7 @@
     <Content Include="Views\Gebruiker\nope.cshtml" />
     <Content Include="Views\Gebruiker\EditUserPage.cshtml" />
     <Content Include="Views\Verhaal\VerhaalPage.cshtml" />
-    <Content Include="Views\Verhaal\Index.cshtml" />
+    <Content Include="Views\Verhaal\CreateVerhaal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

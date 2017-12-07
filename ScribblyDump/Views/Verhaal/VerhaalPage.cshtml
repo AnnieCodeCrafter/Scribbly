@@ -7,35 +7,42 @@
 
 @using (Html.BeginForm())
 {
-<table id="myTable" style="width: 100%">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Datum</th>
-            <th>Boodschappen</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @using (Html.BeginForm("Bon", "Bon", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.ActionLink("Details", "Details", "Bon", new { id = item.Id }, null)
-                    }
-                </td>
-            </tr>}
-    </tbody>
-</table>
+
+    if (Model != null)
+    {
+        <table id="myTable" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Beschrijving</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Beschrijving)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+
+    else
+    {
+        <p> You don't seem to have any stories yet!</p>
+    }
 }
+
+@using (Html.BeginForm("GoToAddVerhaal", "Verhaal"))
+{
+    <input type="submit" value="Create Story" id="go" />
+}
+

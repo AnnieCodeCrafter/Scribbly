@@ -17,7 +17,7 @@ namespace ScribblyDump.Repositories
         {
             this.context = context;
         }
-        //changed from genothinbruiker obj, change if necessary
+       
         public void addGebruiker(Gebruiker obj)
         {
             this.context.addGebruiker(obj);
@@ -30,22 +30,6 @@ namespace ScribblyDump.Repositories
             
         }
 
-
-        public void deleteGebruiker (Gebruiker obj)
-        {
-            this.context.deleteGebruiker(obj);
-        }
-
-        public void Inactief(bool yn)
-        {
-            this.context.Inactief(yn);
-        }
-
-        public void GetGebrDescr(Gebruiker obj)
-        {
-            this.context.GetGebrDescr(obj);
-        }
-
         public void SetGebrDescr(string username, string descr)
         {
             this.context.SetGebrDescr(username, descr);
@@ -54,6 +38,11 @@ namespace ScribblyDump.Repositories
         public Gebruiker GetGebruiker(Gebruiker obj)
         {
             return context.getGebruiker(obj);
+        }
+
+        public int getGebruikerID(string username)
+        {
+            return context.GetGebruikerID(username);
         }
     }
 }
