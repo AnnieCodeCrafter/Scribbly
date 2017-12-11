@@ -11,6 +11,6 @@ namespace ScribblyDump.Interfaces
     {
        void AddVerhaal(Verhaal V);
 
-       void GetVerhaal(int id);
+       Verhaal GetVerhaal(int id);
     }
 }

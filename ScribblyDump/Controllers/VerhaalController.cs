@@ -24,14 +24,52 @@ namespace ScribblyDump.Controllers
 
         public ActionResult GoToAddVerhaal(VerhaalViewModel V)
         {
-            return View("CreateVerhaal");
+            //foreach (var item in V.Genres)
+            //{
+
+            //    V.genreList.Add(new SelectListItem
+            //    {
+            //        Text = item.ToString()
+            //    });
+            //}
+            return View("CreateVerhaal", V);
 
         }
 
+        [HttpPost]
         public ActionResult AddVerhaal(VerhaalViewModel V)
         {
-            Verhaal H = new Verhaal()
+            try
+            {
+                
+                Verhaal B = new Verhaal();
+                int id = Convert.ToInt32(Session["usID"]);
+                B.VerhaalGenre = (VerhaalGenres)((int)V.Genre);
+
+                Verhaal H = new Verhaal(V.Titel, V.Beschrijving, B.VerhaalGenre, id);
+                Repo.AddVerhaal(H);
+              
+
+                
+                return View("VerhaalPage", H);
+
+               
+            }
+
             
+
+            catch
+            {
+                return View("Nope");
+            }
+
+        }
+
+        public ActionResult GetGenreList(VerhaalViewModel V)
+        {
+            
+
+            return View();
         }
 
 

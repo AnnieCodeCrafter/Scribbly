@@ -1,5 +1,5 @@
 ﻿@model ScribblyDump.ViewModel.VerhaalViewModel
-@using ScribblyDump.ViewModel
+
 
 @{
     ViewBag.Title = "CreateVerhaal";
@@ -7,28 +7,20 @@
 
 <h2>CreateVerhaal</h2>
 
-@{
-    genre genre;
-
-    foreach (var item in genre)
-    {
-        genreList.Add(new SelectListItem
-        {
-
-        });
-    }
-}
-
-
 @using (Html.BeginForm("AddVerhaal", "Verhaal"))
 {
+    
     <label> Title </label>
     @Html.TextBoxFor(model => model.Titel)
 
     <label> Description </label>
     @Html.TextBoxFor(model=> model.Beschrijving)
 
-    <label>Genre</label>
+
+        <label>Genre</label>
+    
+    @Html.EnumDropDownListFor(model => model.Genre)
+
 
     <input type="submit" value="Submit" id="Save" />
 }

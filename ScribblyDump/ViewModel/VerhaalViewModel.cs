@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ScribblyDump.ViewModel
 {
@@ -14,12 +15,24 @@ namespace ScribblyDump.ViewModel
         private string titel;
         private string beschrijving;
         private int gebrID;
+        private genre genre;
         
         public string Titel
         {
             get { return titel; }
             set { titel = value; }
 
+        }
+
+        public IEnumerable<SelectListItem> Genres
+        {
+            get; set;
+        }
+       
+
+        public genre Genre
+        {
+            get { return genre; }
         }
 
         public string Beschrijving
@@ -41,5 +54,16 @@ namespace ScribblyDump.ViewModel
             this.genre = genre;
             this.gebrID = gebrID;
         }
+
+        public VerhaalViewModel()
+        {
+
+        }
+
+        
+        
     }
+
+        
+    
 }

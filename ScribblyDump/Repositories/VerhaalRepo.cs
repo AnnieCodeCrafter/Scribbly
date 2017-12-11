@@ -21,9 +21,9 @@ namespace ScribblyDump.Repositories
             this.context.AddVerhaal(V);
         }
 
-        public void GetVerhaal(int id)
+        public Verhaal GetVerhaal(int id)
         {
-            this.context.GetVerhaal(id);
+            return context.GetVerhaal(id);
         }
 
 
