@@ -215,6 +215,7 @@
     <Content Include="Views\Verhaal\VerhaalPage.cshtml" />
     <Content Include="Views\Verhaal\CreateVerhaal.cshtml" />
     <Content Include="Views\Verhaal\nope.cshtml" />
+    <Content Include="Views\Verhaal\yup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

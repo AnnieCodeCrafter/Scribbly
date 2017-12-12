@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ScribblyDump.Interfaces;
 using ScribblyDump.Models;
+using ScribblyDump.ViewModel;
 
 namespace ScribblyDump.Repositories
 {
@@ -21,9 +22,14 @@ namespace ScribblyDump.Repositories
             this.context.AddVerhaal(V);
         }
 
-        public Verhaal GetVerhaal(int id)
+        public List<Verhaal> GetVerhaal(int id)
         {
             return context.GetVerhaal(id);
+        }
+
+        public List<VerhaalViewModel> ToViewModel(int usID)
+        {
+            return context.ToViewModel(usID);
         }
 
 

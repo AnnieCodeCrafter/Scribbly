@@ -29,15 +29,16 @@ namespace ScribblyDump.ViewModel
             get; set;
         }
        
-
+        public int ID { get; set; }
         public genre Genre
         {
             get { return genre; }
+            set { genre = value; }
         }
 
         public string Beschrijving
         {
-            get { return titel; }
+            get { return beschrijving; }
             set { beschrijving = value; }
         }
 
@@ -47,12 +48,13 @@ namespace ScribblyDump.ViewModel
             set { gebrID = value; }
 
         }
-        public VerhaalViewModel(string titel, string beschrijving, genre genre, int gebrID)
+        public VerhaalViewModel(int id, string titel, string beschrijving, genre genre, int gebrID)
         {
             this.titel = titel;
             this.beschrijving = beschrijving;
             this.genre = genre;
             this.gebrID = gebrID;
+            this.ID = id;
         }
 
         public VerhaalViewModel()

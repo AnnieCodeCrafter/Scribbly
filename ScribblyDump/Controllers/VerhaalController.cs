@@ -16,22 +16,19 @@ namespace ScribblyDump.Controllers
 
         VerhaalRepo Repo = new VerhaalRepo(new VerhaalSqlContext());
         // GET: Verhaal
-        public ActionResult Index()
+        public ActionResult Index(VerhaalViewModel V)
         {
+           
+            int usID = Convert.ToInt32(Session["usID"]);
+
+            List<VerhaalViewModel> F = Repo.ToViewModel(usID);
             //TODO: repo--IEnumerable verhaal
-            return View("VerhaalPage");
+            return View("VerhaalPage", F);
         }
 
         public ActionResult GoToAddVerhaal(VerhaalViewModel V)
         {
-            //foreach (var item in V.Genres)
-            //{
-
-            //    V.genreList.Add(new SelectListItem
-            //    {
-            //        Text = item.ToString()
-            //    });
-            //}
+           
             return View("CreateVerhaal", V);
 
         }
@@ -43,20 +40,17 @@ namespace ScribblyDump.Controllers
             {
                 
                 Verhaal B = new Verhaal();
-                int id = Convert.ToInt32(Session["usID"]);
+                int usID = Convert.ToInt32(Session["usID"]);
                 B.VerhaalGenre = (VerhaalGenres)((int)V.Genre);
 
-                Verhaal H = new Verhaal(V.Titel, V.Beschrijving, B.VerhaalGenre, id);
-                Repo.AddVerhaal(H);
+                Verhaal J = new Verhaal(V.ID, V.Titel, V.Beschrijving, B.VerhaalGenre, usID);
+                Repo.AddVerhaal(J);
+
+                List<VerhaalViewModel> F = Repo.ToViewModel(usID);
               
+                return View("VerhaalPage", F);
 
-                
-                return View("VerhaalPage", H);
-
-               
             }
-
-            
 
             catch
             {
@@ -65,16 +59,25 @@ namespace ScribblyDump.Controllers
 
         }
 
-        public ActionResult GetGenreList(VerhaalViewModel V)
-        {
-            
+        [HttpPost]
+       public ActionResult DeleteVerhaal(int id, bool isTrue)
+       {
+            int usID = Convert.ToInt32(Session["usID"]);
 
-            return View();
+            if (isTrue)
+            {
+                return View("yup");
+            }
+            else
+            {
+                return View("nope");
+            }
+
         }
 
 
-
-
+       
+       
 
     }
 }

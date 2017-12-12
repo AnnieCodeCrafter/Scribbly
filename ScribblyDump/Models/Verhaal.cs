@@ -13,6 +13,7 @@ namespace ScribblyDump.Models
 
     public class Verhaal
     {
+        private int id;
         private string titel;
         private string beschrijving;
         private string coverart;
@@ -22,6 +23,10 @@ namespace ScribblyDump.Models
 
         public  VerhaalGenres VerhaalGenre { get; set; }
         
+        public int ID
+        {
+            get { return id; }
+        }
 
         public string Titel
         {
@@ -61,8 +66,9 @@ namespace ScribblyDump.Models
    
         //}
 
-        public Verhaal(string titel, string beschrijving, VerhaalGenres genre, int auteurID)
+        public Verhaal(int id, string titel, string beschrijving, VerhaalGenres genre, int auteurID)
         {
+            this.id = id;
             this.titel = titel;
             this.beschrijving = beschrijving;
             this.auteurid = auteurID;

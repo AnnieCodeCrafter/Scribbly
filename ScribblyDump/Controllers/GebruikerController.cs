@@ -129,7 +129,7 @@ namespace ScribblyDump.Controllers
             if(usID != 0)
             {
                 Session["usID"] = usID;
-                Bepo.GetVerhaal(usID);
+                
                 return RedirectToAction("index", "verhaal");
 
             }

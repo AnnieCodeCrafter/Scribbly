@@ -1,7 +1,29 @@
-﻿@model ScribblyDump.ViewModel.VerhaalViewModel
+﻿@model List<ScribblyDump.ViewModel.VerhaalViewModel>
 @{
     ViewBag.Title = "VerhaalPage";
 }
+
+
+
+<script type="text/javascript">
+    function Submit() {
+        if (confirm("Are you sure you want to submit ?")) {
+            document.getElementById('anchortag').href += "?isTrue=true";
+        } else {
+            document.getElementById('anchortag').href += "?isTrue=false";
+        }
+        return true;
+    }
+</script>
+
+
+
+
+
+
+
+
+
 
 <h2>VerhaalPage</h2>
 
@@ -13,8 +35,11 @@
         <table id="myTable" style="width: 100%">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Titel</th>
                     <th>Beschrijving</th>
+                    <th>Genre</th>
+                    <th>Create New Chapter</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,12 +47,34 @@
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td>@Html.DisplayFor(modelItem=> item.ID)</td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Titel)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Beschrijving)
                         </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Genre)
+                        </td>
+                        <td>
+                            <input type="submit" value="createchapter" id="go" />
+                        </td>
+
+                        <td>
+
+                            @using (Html.BeginForm("DeleteVerhaal", "Verhaal"))
+                            {
+                                
+
+                                @Html.ActionLink("Delete", "DeleteVerhaal", "Verhaal", new { @onclick = "return Submit();", id = "anchortag" })
+
+                            }
+                            
+
+                        </td>
+
+
                     </tr>
                 }
             </tbody>

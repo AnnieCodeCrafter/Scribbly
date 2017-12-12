@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScribblyDump.Models;
+using ScribblyDump.ViewModel;
 
 namespace ScribblyDump.Interfaces
 {
@@ -11,6 +12,8 @@ namespace ScribblyDump.Interfaces
     {
        void AddVerhaal(Verhaal V);
 
-       Verhaal GetVerhaal(int id);
+       List<Verhaal> GetVerhaal(int id);
+
+        List<VerhaalViewModel> ToViewModel(int usID);
     }
 }
