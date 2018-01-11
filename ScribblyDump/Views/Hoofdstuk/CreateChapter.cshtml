@@ -6,11 +6,17 @@
 
 <h2>CreateChapter</h2>
 
-<p> titel</p>
-@Html.TextBoxFor(model => model.Titel)
+@using (Html.BeginForm("SubmitChapter", "Hoofdstuk"))
+{
+    <p> titel</p>
+    @Html.TextBoxFor(model => model.Titel)
 
 
-<p> Body </p>
-@Html.TextAreaFor(model => model.Body);
+    <p> Body </p>
+    @Html.TextAreaFor(model => model.Body);
 
-<input type="submit" value="Submit" id="Save" />
+    <p> Hoofdstuk nummer</p>
+    @Html.TextBoxFor(model => model.hfdstkID)
+
+    <input type="submit" value="Submit" id="Save" />
+}

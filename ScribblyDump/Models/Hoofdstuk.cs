@@ -32,14 +32,20 @@ namespace ScribblyDump.Models
             get { return comment; }
         }
 
-        public string VerhaalID { get;  }
+        public int VerhaalID { get;  }
 
-        //public Hoofdstuk(string titel, int nummer, string body)
-        //{
-        //    this.titel = titel;
-        //    this.nummer = nummer;
-        //    this.body = body;
-           
-        //}
+        public Hoofdstuk(string titel, string body, int nummer, int verhaalid)
+        {
+            this.titel = titel;
+            this.nummer = nummer;
+            this.body = body;
+            this.VerhaalID = verhaalid;
+
+        }
+
+        public Hoofdstuk()
+        {
+
+        }
     }
 }

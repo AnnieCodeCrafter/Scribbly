@@ -20,14 +20,21 @@ namespace ScribblyDump.Controllers
             return View("Hoofdstuk");
         }
 
-        public ActionResult GoToCreateNewChapter(HoofdstukViewModel H)
+        public ActionResult GoToCreateNewChapter()
         {
             return View("CreateChapter");
         }
 
-        //public ActionResult SubmitChapter(HoofdstukViewModel H)
-        //{
+        public ActionResult SubmitChapter(HoofdstukViewModel H)
+        {
+            string Titel = H.Titel;
+            string Body = H.Body;
+            int Nummer = H.nummer;
+            int storyID = Convert.ToInt32(Session["StoryID"]);
+            Hoofdstuk D = new Hoofdstuk(Titel, Body, Nummer, storyID);
+            Repo.AddHoofdstuk(D);
 
-        //}
+            return RedirectToAction("Index", "Verhaal");
+        }
     }
 }

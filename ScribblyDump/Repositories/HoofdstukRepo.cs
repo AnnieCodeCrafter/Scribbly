@@ -17,6 +17,16 @@ namespace ScribblyDump.Repositories
         {
             this.context = context;
         }
+
+        public void AddHoofdstuk(Hoofdstuk H)
+        {
+            this.context.AddHoofdstuk(H);
+        }
+
+        public Hoofdstuk GetHoofdstuk(int VerhaalID)
+        {
+            return context.GetHoofdstuk(VerhaalID);
+        }
     }
 
 }

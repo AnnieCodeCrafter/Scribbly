@@ -1,14 +1,19 @@
-﻿@model ScribblyDump.ViewModel.HoofdstukViewModel
+﻿@model List<ScribblyDump.ViewModel.HoofdstukViewModel>
 @{
     ViewBag.Title = "Hoofdstuk";
 }
 
 @if (Model != null)
 {
-   <h2>@Html.DisplayFor(model => model.Titel)</h2> 
+    <ul>
+   @foreach(var item in Model)
+    {
+        
+      <li>@Html.ActionLink($"{item.Titel}", "Chapter", "Hoofdstuk")</li>
+      
+    }
 
-    @Html.DisplayFor(model=> model.Body)
-
+   </ul>
 
 }
 
