@@ -1,0 +1,53 @@
+﻿@model List<ScribblyDump.ViewModel.VerhaalViewModel>
+@{
+    ViewBag.Title = "ShortlistVerhaal";
+}
+
+<h2>ShortlistVerhaal</h2>
+
+@if (Model != null)
+{
+    int i = 0;
+
+    <table id="myTable" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Titel</th>
+                
+            </tr>
+
+        </thead>
+
+           
+            @foreach (var item in Model)
+            {
+                i += 1;
+
+                <tbody>
+                    <tr>
+
+                        <td>
+                            @i
+                        </td>
+                        <td>                      
+                            @Html.ActionLink($"{item.Titel}", "FirstChapter", new { ID = item.ID }, null)
+                        </td>
+                      
+
+                    </tr>
+
+                </tbody>
+             }
+
+        
+
+
+    </table>
+}
+
+
+else
+{
+    <p> You dont seem to have any stories yet!</p>
+}

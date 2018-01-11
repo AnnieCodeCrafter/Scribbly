@@ -94,8 +94,9 @@ namespace ScribblyDump.Database
             }
         }
 
-        public Gebruiker getGebruiker(Gebruiker obj)
+        public Gebruiker getGebruiker(string gebruiker)
         {
+            Gebruiker obj = new Gebruiker();
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 try
@@ -104,7 +105,7 @@ namespace ScribblyDump.Database
                     string query = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = @username";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@username", obj.Username);
+                        cmd.Parameters.AddWithValue("@username", gebruiker);
                         cmd.ExecuteNonQuery();
 
                         SqlDataAdapter adapt = new SqlDataAdapter(cmd);
@@ -118,10 +119,11 @@ namespace ScribblyDump.Database
                             {
                                 // get everything from the things and make a new obj
                                 string desc = (string)reader["description"];
+                                string password = (string)reader["Wachtwoord"];
                                 string email = (string)reader["Email"];
                                 int ID = ((int)reader["ID"]);
                                 string profilePic = (string)reader["profilePic"];
-                                obj = new Gebruiker(obj.Username, obj.Password, email, desc, profilePic);
+                                obj = new Gebruiker(gebruiker, password, email, desc, profilePic);
                             }
                         }
                     }

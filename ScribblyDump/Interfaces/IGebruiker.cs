@@ -28,7 +28,7 @@ namespace ScribblyDump.Interfaces
 
         void SetGebrDescr(string username, string descr);
 
-        Gebruiker getGebruiker(Gebruiker obj);
+        Gebruiker getGebruiker(string gebruiker);
 
         int GetGebruikerID(string username);
 

@@ -21,7 +21,7 @@ namespace ScribblyDump.Controllers
            
             int usID = Convert.ToInt32(Session["usID"]);
 
-            List<VerhaalViewModel> F = Repo.ToViewModel(usID);
+            List<VerhaalViewModel> F = Repo.ToListViewModel(usID);
             //TODO: repo--IEnumerable verhaal
             return View("VerhaalPage", F);
         }
@@ -38,15 +38,12 @@ namespace ScribblyDump.Controllers
         {
             try
             {
-                
-                Verhaal B = new Verhaal();
                 int usID = Convert.ToInt32(Session["usID"]);
-                B.VerhaalGenre = (VerhaalGenres)((int)V.Genre);
-
-                Verhaal J = new Verhaal(V.ID, V.Titel, V.Beschrijving, B.VerhaalGenre, usID);
+             
+                Verhaal J = new Verhaal(V.ID, V.Titel, V.Beschrijving, (VerhaalGenres)((int)V.Genre), usID);
                 Repo.AddVerhaal(J);
 
-                List<VerhaalViewModel> F = Repo.ToViewModel(usID);
+                List<VerhaalViewModel> F = Repo.ToListViewModel(usID);
               
                 return View("VerhaalPage", F);
 
@@ -59,25 +56,58 @@ namespace ScribblyDump.Controllers
 
         }
 
-        [HttpPost]
-       public ActionResult DeleteVerhaal(int id, bool isTrue)
-       {
-            int usID = Convert.ToInt32(Session["usID"]);
+        
+        public ActionResult Delete(int id) 
+        {
 
-            if (isTrue)
+            if (id > 0)
             {
-                return View("yup");
+
+                Repo.DeleteVerhaal(Repo.GetVerhaal(id));
+                int usID = Convert.ToInt32(Session["usID"]);
+                List<VerhaalViewModel> F = Repo.ToListViewModel(usID);
+
+                return View("VerhaalPage", F);
+
+
             }
+
             else
             {
-                return View("nope");
+                return View("Nope");
             }
-
+                //return RedirectToAction("DeleteVerhaal");
+          
         }
 
+        public ActionResult CreateNewChapter(int id)
+        {
+            Session["StoryID"] = id;
+            return RedirectToAction("GoToCreateNewChapter", "hoofdstuk");
+            
+            
+        }
 
+        public ActionResult FirstChapter(int id)
+        {
+            return RedirectToAction("Index", "hoofdstuk");
+        }
+
+        public ActionResult Shortlist()
+        {
+            int usID = Convert.ToInt32(Session["usID"]);
+            List<VerhaalViewModel> F = Repo.ShortlistProcedure(usID);
+            
+            return View("ShortlistVerhaal", F);
+        }
+
+        
        
-       
+        
+
+
+
+
 
     }
 }

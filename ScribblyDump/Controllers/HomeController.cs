@@ -10,21 +10,34 @@ namespace ScribblyDump.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message = "Scribbly";
             return View();
+           
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "This is who we are";
 
             return View();
         }
 
+
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact Us";
 
             return View();
+        }
+
+        public ActionResult GoToLogin()
+        {
+            return RedirectToAction("GoToLogin", "Gebruiker");
+        }
+
+        public ActionResult GoToRegister()
+        {
+            return RedirectToAction("GoToRegister", "Gebruiker");
         }
     }
 }

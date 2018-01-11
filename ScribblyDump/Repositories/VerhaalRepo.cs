@@ -22,16 +22,35 @@ namespace ScribblyDump.Repositories
             this.context.AddVerhaal(V);
         }
 
-        public List<Verhaal> GetVerhaal(int id)
+        public List<Verhaal> GetListVerhalen(int id)
+        {
+            return context.GetListVerhalen(id);
+        }
+
+        public List<VerhaalViewModel> ToListViewModel(int usID)
+        {
+            return context.ToListViewModel(usID);
+        }
+
+        public VerhaalViewModel ToViewModel(Verhaal V)
+        {
+            return context.ToViewModel(V);
+        }
+
+        public Verhaal GetVerhaal(int id)
         {
             return context.GetVerhaal(id);
         }
 
-        public List<VerhaalViewModel> ToViewModel(int usID)
+        public void DeleteVerhaal(Verhaal V)
         {
-            return context.ToViewModel(usID);
+            this.context.DeleteVerhaal(V);
         }
 
+        public List<VerhaalViewModel> ShortlistProcedure(int usid)
+        {
+            return context.ShortlistProcedure(usid);
+        }
 
     }
 }

@@ -3,54 +3,46 @@
     ViewBag.Title = "VerhaalPage";
 }
 
-
-
-<script type="text/javascript">
-    function Submit() {
-        if (confirm("Are you sure you want to submit ?")) {
-            document.getElementById('anchortag').href += "?isTrue=true";
-        } else {
-            document.getElementById('anchortag').href += "?isTrue=false";
-        }
-        return true;
-    }
-</script>
-
-
-
-
-
-
-
-
+<head>
+    <!-- een boven, een boven, Content, Scribble.css-->
+    @*<link rel="stylesheet" type="text/css" href="../../Content/Scribble.css">*@
+</head>
 
 
 <h2>VerhaalPage</h2>
 
-@using (Html.BeginForm())
+@if (Model != null)
 {
+    int i = 0;
 
-    if (Model != null)
-    {
-        <table id="myTable" style="width: 100%">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Titel</th>
-                    <th>Beschrijving</th>
-                    <th>Genre</th>
-                    <th>Create New Chapter</th>
-                </tr>
-            </thead>
-            <tbody>
+    <table id="myTable" style="width: 100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titel</th>
+                <th>Beschrijving</th>
+                <th>Genre</th>
+                <th>Create New Chapter</th>
+            </tr>
 
-                @foreach (var item in Model)
-                {
+        </thead>
+
+      
+         
+          @foreach (var item in Model)
+          {
+              i += 1;
+
+                <tbody>
                     <tr>
-                        <td>@Html.DisplayFor(modelItem=> item.ID)</td>
+
                         <td>
-                            @Html.DisplayFor(modelItem => item.Titel)
+                            @i
                         </td>
+                        <td>
+                          
+                            @Html.ActionLink($"{item.Titel}", "FirstChapter", new { ID = item.ID }, null)
+                           </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Beschrijving)
                         </td>
@@ -58,38 +50,33 @@
                             @Html.DisplayFor(modelItem => item.Genre)
                         </td>
                         <td>
-                            <input type="submit" value="createchapter" id="go" />
+                          @Html.ActionLink("CreateChapter", "CreateNewChapter", new { ID = item.ID }, null)
                         </td>
 
                         <td>
 
-                            @using (Html.BeginForm("DeleteVerhaal", "Verhaal"))
-                            {
-                                
-
-                                @Html.ActionLink("Delete", "DeleteVerhaal", "Verhaal", new { @onclick = "return Submit();", id = "anchortag" })
-
-                            }
-                            
+                            @Html.ActionLink("Delete", "Delete", new { ID = item.ID }, null)                      
 
                         </td>
 
-
                     </tr>
-                }
-            </tbody>
-        </table>
 
-    }
+                </tbody>
+           }
 
-    else
-    {
-        <p> You don't seem to have any stories yet!</p>
-    }
+
+
+
+    </table>
 }
 
-@using (Html.BeginForm("GoToAddVerhaal", "Verhaal"))
+
+else
 {
-    <input type="submit" value="Create Story" id="go" />
+    <p> You dont seem to have any stories yet!</p>
 }
 
+            @using(Html.BeginForm("GoToAddVerhaal", "Verhaal"))
+            {
+                <input type="submit" value="Create Story" id="go" />
+            }

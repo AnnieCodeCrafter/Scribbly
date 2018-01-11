@@ -35,9 +35,9 @@ namespace ScribblyDump.Repositories
             this.context.SetGebrDescr(username, descr);
         }
 
-        public Gebruiker GetGebruiker(Gebruiker obj)
+        public Gebruiker GetGebruiker(string gebruiker)
         {
-            return context.getGebruiker(obj);
+            return context.getGebruiker(gebruiker);
         }
 
         public int getGebruikerID(string username)

@@ -32,6 +32,8 @@ namespace ScribblyDump.Models
             get { return comment; }
         }
 
+        public string VerhaalID { get;  }
+
         //public Hoofdstuk(string titel, int nummer, string body)
         //{
         //    this.titel = titel;

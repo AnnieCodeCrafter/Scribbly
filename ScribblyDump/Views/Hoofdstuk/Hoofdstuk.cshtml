@@ -1,0 +1,20 @@
+﻿@model ScribblyDump.ViewModel.HoofdstukViewModel
+@{
+    ViewBag.Title = "Hoofdstuk";
+}
+
+@if (Model != null)
+{
+   <h2>@Html.DisplayFor(model => model.Titel)</h2> 
+
+    @Html.DisplayFor(model=> model.Body)
+
+
+}
+
+else
+{
+    <p> This story does not have any chapters yet!</p>
+}
+
+

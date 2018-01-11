@@ -12,8 +12,19 @@ namespace ScribblyDump.Interfaces
     {
        void AddVerhaal(Verhaal V);
 
-       List<Verhaal> GetVerhaal(int id);
+       List<Verhaal> GetListVerhalen(int id);
 
-        List<VerhaalViewModel> ToViewModel(int usID);
+        List<VerhaalViewModel> ToListViewModel(int usID);
+
+        Verhaal GetVerhaal(int id);
+
+        VerhaalViewModel ToViewModel(Verhaal V);
+
+        void DeleteVerhaal(Verhaal V);
+
+        List<VerhaalViewModel> ShortlistProcedure(int usid);
+
+
+
     }
 }

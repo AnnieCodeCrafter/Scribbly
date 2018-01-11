@@ -1,0 +1,16 @@
+﻿@model ScribblyDump.ViewModel.HoofdstukViewModel
+
+@{
+    ViewBag.Title = "CreateChapter";
+}
+
+<h2>CreateChapter</h2>
+
+<p> titel</p>
+@Html.TextBoxFor(model => model.Titel)
+
+
+<p> Body </p>
+@Html.TextAreaFor(model => model.Body);
+
+<input type="submit" value="Submit" id="Save" />

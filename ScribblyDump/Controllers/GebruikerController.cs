@@ -38,6 +38,14 @@ namespace ScribblyDump.Controllers
             return View("Login");
         }
 
+        public ActionResult GoToUserPage()
+        {
+            string username = Session["Username"].ToString();
+            Gebruiker F = Repo.GetGebruiker(username);
+            GebruikerViewModel obj = new GebruikerViewModel(F.Username, F.Password, F.Email, F.Description);
+            return View("userPage", obj);
+        }
+
         //view: register
         [HttpPost]
         public ActionResult Register(GebruikerViewModel obj)
@@ -72,7 +80,7 @@ namespace ScribblyDump.Controllers
                 {
                     obj = new GebruikerViewModel(Y.Username, Y.Password, Y.Email, Y.Description);
                     // you gotta fill the session before you return the view, or else its bad
-                    Session["Message"] = "yey";
+                  
                     Session["Username"] = obj.Username;
 
                     return View("userPage", obj);
@@ -93,12 +101,11 @@ namespace ScribblyDump.Controllers
         // view: userpage
         public ActionResult Description(GebruikerViewModel obj)
         {
-            obj.Username = Session["Username"].ToString();
+            string Username = Session["Username"].ToString();
             
 
-            Gebruiker G = new Gebruiker(obj.Username);
-            Gebruiker Y = Repo.GetGebruiker(G);
-     
+          
+            Gebruiker Y = Repo.GetGebruiker(Username);     
             obj = new GebruikerViewModel(Y.Username, Y.Password, Y.Email, Y.Description);
             return View("EditUserPage", obj);
         }
@@ -110,7 +117,7 @@ namespace ScribblyDump.Controllers
             string username = Session["Username"].ToString();
             Gebruiker G = new Gebruiker(username);
             Repo.SetGebrDescr(username, obj.Description);
-            Gebruiker F = Repo.GetGebruiker(G);
+            Gebruiker F = Repo.GetGebruiker(username);
             obj = new GebruikerViewModel(F.Username, F.Password, F.Email, F.Description);
             
             
@@ -140,6 +147,27 @@ namespace ScribblyDump.Controllers
                 return View("Nope");
             }
            
+
+        }
+
+        public ActionResult GoToShortlist(GebruikerViewModel obj)
+        {
+            string username = Session["Username"].ToString();
+
+            int usID = Repo.getGebruikerID(username);
+            if (usID != 0)
+            {
+                Session["usID"] = usID;
+
+                return RedirectToAction("Shortlist", "verhaal");
+
+            }
+
+            else
+            {
+
+                return View("Nope");
+            }
 
         }
 

@@ -36,7 +36,7 @@ namespace ScribblyDump.Database
             }
         }
 
-        public List<Verhaal> GetVerhaal(int id)
+        public List<Verhaal> GetListVerhalen(int id)
         {
             List<Verhaal> F = new List<Verhaal>();
             Verhaal V = new Verhaal();
@@ -82,11 +82,55 @@ namespace ScribblyDump.Database
                 return F;
             }
         }
-        public List<VerhaalViewModel> ToViewModel(int usID)
+
+
+        public Verhaal GetVerhaal (int id)
+        {
+            Verhaal V = new Verhaal();
+           
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT * from Verhaal WHERE ID = @ID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    cmd.ExecuteNonQuery();
+
+                    SqlDataAdapter adapt = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adapt.Fill(ds);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // get everything from the things and make a new obj
+                            int ID = (int)reader["ID"];
+                            string Titel = (string)reader["Titel"];
+                            string Desc = (string)reader["Beschrijving"];
+                            string genre = ((string)reader["Genre"]);
+                            int AutID = (int)reader["AuteurID"];
+
+                            // Enum.TryParse(genre, out VerhaalGenres genres);
+                            VerhaalGenres MyGenres = (VerhaalGenres)Enum.Parse(typeof(VerhaalGenres), genre, true);
+                            V = new Verhaal(ID, Titel, Desc, MyGenres, AutID);
+
+                        }
+
+                    }
+                }
+                conn.Close();
+                return V;
+            }
+            
+        }
+        public List<VerhaalViewModel> ToListViewModel(int usID)
         {
             List<VerhaalViewModel> F = new List<VerhaalViewModel>();
             VerhaalViewModel V;
-            foreach (Verhaal H in GetVerhaal(usID))
+            foreach (Verhaal H in GetListVerhalen(usID))
             {
                 string Titel = H.Titel;
                 string Desc = H.Beschrijving;
@@ -98,6 +142,75 @@ namespace ScribblyDump.Database
          
             return F;
 
+        }
+
+        public VerhaalViewModel ToViewModel(Verhaal H)
+        {
+            VerhaalViewModel V;
+            int usID = H.AuteurID;
+            string Titel = H.Titel;
+            string Desc = H.Beschrijving;
+            genre Genre = (genre)((int)H.VerhaalGenre);
+            int ID = H.ID;
+            V = new VerhaalViewModel(ID, Titel, Desc, Genre, usID);
+            return V;
+     
+        }
+
+        public void DeleteVerhaal(Verhaal H)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                string query = "DELETE FROM Verhaal WHERE ID = @id AND AuteurID = @AuteurID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.AddWithValue("@id", H.ID);
+                    cmd.Parameters.AddWithValue("@AuteurID", H.AuteurID);
+
+                    cmd.ExecuteNonQuery();
+
+                }
+                conn.Close();
+            }
+
+        }
+
+        public List<VerhaalViewModel> ShortlistProcedure(int usid)
+        {
+            List<VerhaalViewModel> F = new List<VerhaalViewModel>();
+            VerhaalViewModel V;
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(
+                "HaalVerhalenVanAuteur", conn);
+             
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(
+                    new SqlParameter("@ID", usid));
+
+                // execute the command
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string Titel = (string)reader["Titel"];
+                        V = new VerhaalViewModel(Titel);
+                        F.Add(V);
+                    }                      
+                      
+                }
+
+                conn.Close();
+            }
+
+            return F;
+        
         }
     }
 

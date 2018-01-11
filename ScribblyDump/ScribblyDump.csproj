@@ -157,6 +157,7 @@
     </Compile>
     <Compile Include="Interfaces\IComment.cs" />
     <Compile Include="Interfaces\IGebruiker.cs" />
+    <Compile Include="Interfaces\IHoofdstuk.cs" />
     <Compile Include="Interfaces\IVerhaal.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Gebruiker.cs" />
@@ -164,8 +165,10 @@
     <Compile Include="Models\Verhaal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GebruikerRepo.cs" />
+    <Compile Include="Repositories\HoofdstukRepo.cs" />
     <Compile Include="Repositories\VerhaalRepo.cs" />
     <Compile Include="ViewModel\GebruikerViewModel.cs" />
+    <Compile Include="ViewModel\HoofdstukViewModel.cs" />
     <Compile Include="ViewModel\VerhaalViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -216,11 +219,13 @@
     <Content Include="Views\Verhaal\CreateVerhaal.cshtml" />
     <Content Include="Views\Verhaal\nope.cshtml" />
     <Content Include="Views\Verhaal\yup.cshtml" />
+    <Content Include="Views\Hoofdstuk\Hoofdstuk.cshtml" />
+    <Content Include="Views\Hoofdstuk\CreateChapter.cshtml" />
+    <Content Include="Views\Verhaal\ShortlistVerhaal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Comment\" />
-    <Folder Include="Views\Hoofdstuk\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

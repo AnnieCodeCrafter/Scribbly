@@ -62,6 +62,11 @@ namespace ScribblyDump.ViewModel
 
         }
 
+        public VerhaalViewModel(string titel)
+        {
+            this.titel = titel;
+        }
+
         
         
     }

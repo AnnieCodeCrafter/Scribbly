@@ -18,6 +18,23 @@ namespace ScribblyDump
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+            "delet", // Route name
+            "Index/{guid}", // URL with parameters
+            new
+            {
+                controller = "Verhaal",
+                action = "Index",
+                guid = UrlParameter.Optional
+            } 
+        );
+
+
+
+
+
+
         }
     }
 }
