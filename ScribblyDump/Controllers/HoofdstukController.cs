@@ -29,12 +29,33 @@ namespace ScribblyDump.Controllers
         {
             string Titel = H.Titel;
             string Body = H.Body;
-            int Nummer = H.nummer;
+            int Nummer = Convert.ToInt32(H.nummer);
             int storyID = Convert.ToInt32(Session["StoryID"]);
             Hoofdstuk D = new Hoofdstuk(Titel, Body, Nummer, storyID);
             Repo.AddHoofdstuk(D);
 
             return RedirectToAction("Index", "Verhaal");
+        }
+
+        public ActionResult ViewChapterList()
+        {
+            
+            int StoryID = Convert.ToInt32(Session["StoryID"]);
+        
+
+           List<HoofdstukViewModel> F = Repo.ToListViewModel(Repo.GetHoofdstuk(StoryID));
+
+            return View("Hoofdstuk", F);
+        }
+
+        public ActionResult ViewChapter(int ID)
+        {
+            int StoryID = Convert.ToInt32(Session["StoryID"]);
+
+            HoofdstukViewModel H = Repo.ToViewModel(Repo.getSingleHoofdstuk(ID, StoryID));
+
+            return View("SingleChapter", H);
+
         }
     }
 }

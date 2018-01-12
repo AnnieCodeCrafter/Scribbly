@@ -21,8 +21,8 @@ namespace ScribblyDump.Controllers
            
             int usID = Convert.ToInt32(Session["usID"]);
 
-            List<VerhaalViewModel> F = Repo.ToListViewModel(usID);
-            //TODO: repo--IEnumerable verhaal
+            List<VerhaalViewModel> F = Repo.ToListViewModel(Repo.GetListVerhalen(usID));
+         
             return View("VerhaalPage", F);
         }
 
@@ -43,7 +43,7 @@ namespace ScribblyDump.Controllers
                 Verhaal J = new Verhaal(V.ID, V.Titel, V.Beschrijving, (VerhaalGenres)((int)V.Genre), usID);
                 Repo.AddVerhaal(J);
 
-                List<VerhaalViewModel> F = Repo.ToListViewModel(usID);
+                List<VerhaalViewModel> F = Repo.ToListViewModel(Repo.GetListVerhalen(usID));
               
                 return View("VerhaalPage", F);
 
@@ -65,7 +65,7 @@ namespace ScribblyDump.Controllers
 
                 Repo.DeleteVerhaal(Repo.GetVerhaal(id));
                 int usID = Convert.ToInt32(Session["usID"]);
-                List<VerhaalViewModel> F = Repo.ToListViewModel(usID);
+                List<VerhaalViewModel> F = Repo.ToListViewModel(Repo.GetListVerhalen(usID));
 
                 return View("VerhaalPage", F);
 
@@ -90,7 +90,8 @@ namespace ScribblyDump.Controllers
 
         public ActionResult FirstChapter(int id)
         {
-            return RedirectToAction("Index", "hoofdstuk");
+            Session["StoryID"] = id;
+            return RedirectToAction("ViewChapterList", "hoofdstuk");
         }
 
         public ActionResult Shortlist()
@@ -99,6 +100,15 @@ namespace ScribblyDump.Controllers
             List<VerhaalViewModel> F = Repo.ShortlistProcedure(usID);
             
             return View("ShortlistVerhaal", F);
+        }
+
+        public ActionResult GoToBrowse(VerhaalViewModel L)
+        {
+           
+            List<VerhaalViewModel> F = Repo.ToListViewModel(Repo.GetAlleVerhalen());
+
+            return View("AllStories", F);
+
         }
 
         

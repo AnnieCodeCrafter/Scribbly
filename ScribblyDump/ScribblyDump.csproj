@@ -222,6 +222,8 @@
     <Content Include="Views\Hoofdstuk\Hoofdstuk.cshtml" />
     <Content Include="Views\Hoofdstuk\CreateChapter.cshtml" />
     <Content Include="Views\Verhaal\ShortlistVerhaal.cshtml" />
+    <Content Include="Views\Hoofdstuk\SingleChapter.cshtml" />
+    <Content Include="Views\Verhaal\AllStories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

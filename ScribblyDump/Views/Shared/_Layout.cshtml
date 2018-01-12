@@ -32,6 +32,7 @@
                     {
                         string f = Session["Username"].ToString();
                         <li>@Html.ActionLink($"{f}", "GoToUserPage", "Gebruiker")</li>
+                        <li>@Html.ActionLink("Browse", "GoToBrowse", "Verhaal")</li>
                     }
 
                 </ul>

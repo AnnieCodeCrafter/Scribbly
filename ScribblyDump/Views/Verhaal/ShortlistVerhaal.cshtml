@@ -31,10 +31,8 @@
                             @i
                         </td>
                         <td>                      
-                            @Html.ActionLink($"{item.Titel}", "FirstChapter", new { ID = item.ID }, null)
+                           @Html.DisplayFor(modelItem => item.Titel)
                         </td>
-                      
-
                     </tr>
 
                 </tbody>

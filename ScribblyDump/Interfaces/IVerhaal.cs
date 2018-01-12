@@ -14,7 +14,7 @@ namespace ScribblyDump.Interfaces
 
        List<Verhaal> GetListVerhalen(int id);
 
-        List<VerhaalViewModel> ToListViewModel(int usID);
+        List<VerhaalViewModel> ToListViewModel(List<Verhaal> LV);
 
         Verhaal GetVerhaal(int id);
 
@@ -23,6 +23,8 @@ namespace ScribblyDump.Interfaces
         void DeleteVerhaal(Verhaal V);
 
         List<VerhaalViewModel> ShortlistProcedure(int usid);
+
+        List<Verhaal> GetAlleVerhalen();
 
 
 

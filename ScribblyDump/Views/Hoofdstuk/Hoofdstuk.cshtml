@@ -5,11 +5,12 @@
 
 @if (Model != null)
 {
+    <h2> List of Chapters</h2>
     <ul>
    @foreach(var item in Model)
     {
         
-      <li>@Html.ActionLink($"{item.Titel}", "Chapter", "Hoofdstuk")</li>
+      <li>@Html.ActionLink($"{item.Titel}", "ViewChapter", "Hoofdstuk", new { ID = item.hfdstkID}, null)</li>
       
     }
 

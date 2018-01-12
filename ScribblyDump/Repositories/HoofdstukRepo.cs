@@ -23,9 +23,24 @@ namespace ScribblyDump.Repositories
             this.context.AddHoofdstuk(H);
         }
 
-        public Hoofdstuk GetHoofdstuk(int VerhaalID)
+        public List<Hoofdstuk> GetHoofdstuk(int VerhaalID)
         {
             return context.GetHoofdstuk(VerhaalID);
+        }
+
+        public List<HoofdstukViewModel> ToListViewModel(List<Hoofdstuk> H)
+        {
+            return context.ToListViewModel(H);
+        }
+
+        public Hoofdstuk getSingleHoofdstuk(int hfdstkID, int VerhaalID)
+        {
+            return context.getSingleHoofdstuk(hfdstkID, VerhaalID);
+        }
+
+        public HoofdstukViewModel ToViewModel(Hoofdstuk H)
+        {
+            return context.ToViewModel(H);
         }
     }
 

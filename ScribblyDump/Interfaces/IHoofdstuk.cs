@@ -12,7 +12,12 @@ namespace ScribblyDump.Interfaces
     {
         void AddHoofdstuk(Hoofdstuk H);
 
-        Hoofdstuk GetHoofdstuk(int VerhaalID);
-    
+        List<Hoofdstuk> GetHoofdstuk(int VerhaalID);
+
+        List<HoofdstukViewModel> ToListViewModel(List<Hoofdstuk> H);
+
+        Hoofdstuk getSingleHoofdstuk(int hfdstkID, int VerhaalID);
+        HoofdstukViewModel ToViewModel(Hoofdstuk H);
+
     }
 }

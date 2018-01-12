@@ -16,12 +16,13 @@ namespace ScribblyDump.ViewModel
 
         public int VerhaalID { get; set; }
 
-        public HoofdstukViewModel(string titel, string body, int nummer, int verhaalID)
+        public HoofdstukViewModel(string titel, string body, int nummer, int verhaalID, int hfdstkID)
         {
             this.Titel = titel;
             this.Body = body;
             this.nummer = nummer;
             this.VerhaalID = VerhaalID;
+            this.hfdstkID = hfdstkID;
         }
 
         public HoofdstukViewModel()

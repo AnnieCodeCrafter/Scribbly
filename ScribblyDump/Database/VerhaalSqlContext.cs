@@ -22,7 +22,7 @@ namespace ScribblyDump.Database
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.CommandType = CommandType.Text;
-                  
+
                     cmd.Parameters.AddWithValue("@Titel", V.Titel);
                     cmd.Parameters.AddWithValue("@Beschrijving", V.Beschrijving);
                     cmd.Parameters.AddWithValue("@Genre", V.VerhaalGenre);
@@ -58,36 +58,36 @@ namespace ScribblyDump.Database
 
                     //conn.Close();
 
-                    if (count > 0 )
+                    if (count > 0)
                     {
-                       using (SqlDataReader reader = cmd.ExecuteReader())
-                      {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
                             while (reader.Read())
                             {
                                 // get everything from the things and make a new obj
-                                    int ID = (int)reader["ID"];
-                                    string Titel = (string)reader["Titel"];
-                                    string Desc = (string)reader["Beschrijving"];
-                                    string genre = ((string)reader["Genre"]);
-                                    int AutID = (int)reader["AuteurID"];
+                                int ID = (int)reader["ID"];
+                                string Titel = (string)reader["Titel"];
+                                string Desc = (string)reader["Beschrijving"];
+                                string genre = ((string)reader["Genre"]);
+                                int AutID = (int)reader["AuteurID"];
 
-                                    // Enum.TryParse(genre, out VerhaalGenres genres);
-                                    VerhaalGenres MyGenres = (VerhaalGenres)Enum.Parse(typeof(VerhaalGenres), genre, true);
-                                    V = new Verhaal(ID, Titel, Desc, MyGenres, AutID);
-                                    F.Add(V);
+                                // Enum.TryParse(genre, out VerhaalGenres genres);
+                                VerhaalGenres MyGenres = (VerhaalGenres)Enum.Parse(typeof(VerhaalGenres), genre, true);
+                                V = new Verhaal(ID, Titel, Desc, MyGenres, AutID);
+                                F.Add(V);
                             }
-                       }
-                    }               
+                        }
+                    }
                 }
                 return F;
             }
         }
 
 
-        public Verhaal GetVerhaal (int id)
+        public Verhaal GetVerhaal(int id)
         {
             Verhaal V = new Verhaal();
-           
+
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
@@ -124,22 +124,23 @@ namespace ScribblyDump.Database
                 conn.Close();
                 return V;
             }
-            
+
         }
-        public List<VerhaalViewModel> ToListViewModel(int usID)
+        public List<VerhaalViewModel> ToListViewModel(List<Verhaal> LV)
         {
             List<VerhaalViewModel> F = new List<VerhaalViewModel>();
             VerhaalViewModel V;
-            foreach (Verhaal H in GetListVerhalen(usID))
+            foreach (Verhaal H in LV)
             {
+                int usid = H.AuteurID;
                 string Titel = H.Titel;
                 string Desc = H.Beschrijving;
                 genre Genre = (genre)((int)H.VerhaalGenre);
                 int ID = H.ID;
-                V = new VerhaalViewModel(ID, Titel, Desc, Genre, usID);
+                V = new VerhaalViewModel(ID, Titel, Desc, Genre, usid);
                 F.Add(V);
             }
-         
+
             return F;
 
         }
@@ -154,7 +155,7 @@ namespace ScribblyDump.Database
             int ID = H.ID;
             V = new VerhaalViewModel(ID, Titel, Desc, Genre, usID);
             return V;
-     
+
         }
 
         public void DeleteVerhaal(Verhaal H)
@@ -188,7 +189,7 @@ namespace ScribblyDump.Database
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(
                 "HaalVerhalenVanAuteur", conn);
-             
+
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add(
@@ -202,15 +203,64 @@ namespace ScribblyDump.Database
                         string Titel = (string)reader["Titel"];
                         V = new VerhaalViewModel(Titel);
                         F.Add(V);
-                    }                      
-                      
+                    }
+
                 }
 
                 conn.Close();
             }
 
             return F;
-        
+
+        }
+
+        public List<Verhaal> GetAlleVerhalen()
+        {
+
+            List<Verhaal> F = new List<Verhaal>();
+            Verhaal V = new Verhaal();
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT * from Verhaal";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.ExecuteNonQuery();
+
+                    SqlDataAdapter adapt = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adapt.Fill(ds);
+
+                    int count = ds.Tables[0].Rows.Count;
+
+                    //conn.Close();
+
+                    if (count > 0)
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // get everything from the things and make a new obj
+                                int ID = (int)reader["ID"];
+                                string Titel = (string)reader["Titel"];
+                                string Desc = (string)reader["Beschrijving"];
+                                string genre = ((string)reader["Genre"]);
+                                int AutID = (int)reader["AuteurID"];
+
+                                // Enum.TryParse(genre, out VerhaalGenres genres);
+                                VerhaalGenres MyGenres = (VerhaalGenres)Enum.Parse(typeof(VerhaalGenres), genre, true);
+                                V = new Verhaal(ID, Titel, Desc, MyGenres, AutID);
+                                F.Add(V);
+                            }
+                        }
+                    }
+                }
+                return F;
+            }
+
         }
     }
 

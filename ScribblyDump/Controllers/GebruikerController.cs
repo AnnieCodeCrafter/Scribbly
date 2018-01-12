@@ -20,7 +20,7 @@ namespace ScribblyDump.Controllers
         GebruikerRepo Repo = new GebruikerRepo(new GebruikerSqlContext());
         VerhaalRepo Bepo = new VerhaalRepo(new VerhaalSqlContext());
         // GET: Gebruiker
-        // TODO: RedirectToAction research
+     
 
         public ActionResult Index()
         {

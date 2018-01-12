@@ -27,9 +27,9 @@ namespace ScribblyDump.Repositories
             return context.GetListVerhalen(id);
         }
 
-        public List<VerhaalViewModel> ToListViewModel(int usID)
+        public List<VerhaalViewModel> ToListViewModel(List<Verhaal> LV)
         {
-            return context.ToListViewModel(usID);
+            return context.ToListViewModel(LV);
         }
 
         public VerhaalViewModel ToViewModel(Verhaal V)
@@ -50,6 +50,11 @@ namespace ScribblyDump.Repositories
         public List<VerhaalViewModel> ShortlistProcedure(int usid)
         {
             return context.ShortlistProcedure(usid);
+        }
+
+        public List<Verhaal> GetAlleVerhalen()
+        {
+            return context.GetAlleVerhalen();
         }
 
     }
